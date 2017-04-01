@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Fri Jan 20 01:21:03 2017 Raphaël Goulmot
-** Last update Sat Apr  1 05:21:17 2017 Raphaël Goulmot
+** Last update Sat Apr  1 05:45:42 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -94,6 +94,7 @@ void	launch_args(char *path, char **env, char **args)
 	}
       my_error(check == -1, args[0]);
       my_error(check == -1, ": Command not found.\n");
+      free_wordtab(paths);
     }
   else
     exec(args, 0);

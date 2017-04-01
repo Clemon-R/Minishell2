@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Wed Jan  4 09:08:05 2017 Raphaël Goulmot
-** Last update Sat Apr  1 05:27:09 2017 Raphaël Goulmot
+** Last update Sat Apr  1 05:50:50 2017 Raphaël Goulmot
 */
 
 #include "exec.h"
@@ -44,7 +44,8 @@ int    exec(char **vars, char type)
 
   if ((childpid = fork()) == 0)
     {
-      if (is_regular_file(vars[0]) && access(vars[0], X_OK) != -1)
+      if (vars && vars[0] && is_regular_file(vars[0])
+	  && access(vars[0], X_OK) != -1)
 	execve(vars[0], vars, 0);
       else
 	{
