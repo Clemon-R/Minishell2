@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:51:24 2017 Raphaël Goulmot
-** Last update Mon Apr  3 13:42:44 2017 Raphaël Goulmot
+** Last update Mon Apr  3 13:48:51 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -29,7 +29,7 @@ int	my_setenv(char **env, char **args)
 
   size = env ? my_strstrlen(args) : 0;
   if (size == 1)
-    my_env(env, args);
+    return (my_env(env, args));
   else if (size >= 2 && size <= 3 && !(value = 0))
     {
       while (!value && env && *env)
@@ -41,14 +41,13 @@ int	my_setenv(char **env, char **args)
 	  free_wordtab(line);
 	}
       value = my_strcpy(args[1], "=");
-      if (env)
-	*env++ = (size == 2 ? value : my_strcpy(value, args[2]));
+      (env ? *env++ = (size == 2 ? value : my_strcpy(value, args[2])) : 0);
       free(value);
-      if (env)
-	*env = 0;
+      (env ? *env = 0 : 0);
     }
   else
     my_putstr_err("setenv: Too many arguments.\n");
+  return (size > 3 ? 1 : 0);
 }
 
 int	my_unsetenv(char **env, char **args)
