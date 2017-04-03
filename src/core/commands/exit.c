@@ -5,12 +5,12 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:49:31 2017 Raphaël Goulmot
-** Last update Sat Apr  1 04:50:43 2017 Raphaël Goulmot
+** Last update Mon Apr  3 12:52:59 2017 Raphaël Goulmot
 */
 
 #include <stdlib.h>
 
-void	my_exit(char **env, char **args)
+int	my_exit(char **env, char **args)
 {
   exit(0);
 }

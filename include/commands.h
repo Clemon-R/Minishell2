@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Fri Jan 20 01:21:29 2017 Raphaël Goulmot
-** Last update Sat Apr  1 04:54:14 2017 Raphaël Goulmot
+** Last update Mon Apr  3 12:56:51 2017 Raphaël Goulmot
 */
 
 #ifndef COMMANDS_H_
@@ -14,16 +14,18 @@
 typedef struct	s_functions
 {
   char	*name;
-  void	(*ptsFunction)(char **, char **);
+  int	(*ptsFunction)(char **, char **);
 }		t_functions;
 
 t_functions	*get_all_functions();
-void	(*get_function(char *))(char **, char **);
+int	(*get_function(char *))(char **, char **);
 int	count_args(char **);
 char	*get_var(char **, char *);
-void	commands(char *, char **);
-void	my_exit(char **, char **);
-void	my_env(char **, char **);
-void	my_cd(char **, char **);
+int	commands(char *, char **);
+int	my_exit(char **, char **);
+int	my_env(char **, char **);
+int	my_setenv(char **, char **);
+int	my_unsetenv(char **, char **);
+int	my_cd(char **, char **);
 
 #endif

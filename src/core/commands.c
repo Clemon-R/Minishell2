@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Fri Jan 20 01:21:03 2017 Raphaël Goulmot
-** Last update Mon Apr  3 11:55:21 2017 Raphaël Goulmot
+** Last update Mon Apr  3 13:32:20 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -18,19 +18,23 @@ t_functions	*get_all_functions()
 {
   t_functions	*list;
 
-  list = malloc(sizeof(t_functions) * 3);
+  list = malloc(sizeof(t_functions) * 5);
   list[0].name = "cd";
   list[0].ptsFunction = &my_cd;
   list[1].name = "exit";
   list[1].ptsFunction = &my_exit;
   list[2].name = "env";
   list[2].ptsFunction = &my_env;
+  list[3].name = "setenv";
+  list[3].ptsFunction = &my_setenv;
+  list[4].name = "unsetenv";
+  list[4].ptsFunction = &my_unsetenv;
   return (list);
 }
 
-void	(*get_function(char *str))(char **, char **)
+int	(*get_function(char *str))(char **, char **)
 {
-  void	(*pts)(char **, char **);
+  int	(*pts)(char **, char **);
   t_functions	*list;
   int	i;
   int	count;
@@ -38,7 +42,7 @@ void	(*get_function(char *str))(char **, char **)
   count = 0;
   pts = 0;
   list = get_all_functions();
-  while (count++ < 3)
+  while (count++ < 5)
     {
       i = 0;
       while (str[i] && str[i] == list[count - 1].name[i] && ++i);
@@ -100,11 +104,11 @@ void	launch_args(char *path, char **env, char **args)
     exit(check != -1 ? check : 1);
 }
 
-void	commands(char *arg, char **env)
+int	commands(char *arg, char **env)
 {
   char	**args;
   char	*path;
-  void	(*function)(char **, char **);
+  int	(*function)(char **, char **);
 
   clean_space_tab(arg);
   replace_tab_by_space(arg);
@@ -112,13 +116,17 @@ void	commands(char *arg, char **env)
   if (!*arg || !(args = split(arg, ' ')) || !*args)
     {
       my_putchar(!isatty(0) ? '\n' : '\0');
-      return;
+      return (0);
     }
   my_error(!(path = get_var(env, "PATH")), "ERROR: Path not found !\n");
   function = get_function(args[0]);
   if (function)
-    (*function)(env, args);
+    if (!isatty(0))
+      return ((*function)(env, args));
+    else
+      (*function)(env, args);
   else
     launch_args(path, env, args);
   free_wordtab(args);
+  return (0);
 }
