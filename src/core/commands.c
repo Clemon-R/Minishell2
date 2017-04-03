@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Fri Jan 20 01:21:03 2017 Raphaël Goulmot
-** Last update Sat Apr  1 05:45:42 2017 Raphaël Goulmot
+** Last update Mon Apr  3 11:42:57 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -81,9 +81,8 @@ void	launch_args(char *path, char **env, char **args)
   if (args && args[0][0] != '.' && path && !my_strstr(args[0], "/")
     && (paths = split(path, ':')) && my_strstrlen(paths) && (check = -1) == -1)
     {
-      while (check == -1 && *paths && !(tmp = 0))
+      while (check == -1 && *paths && (tmp = my_strcpy(*paths++, "/")))
 	{
-	  tmp = my_strcpy(*paths++, "/");
 	  name = my_strcpy(tmp, args[0]);
 	  free(tmp);
 	  tmp = args[0];
@@ -94,7 +93,8 @@ void	launch_args(char *path, char **env, char **args)
 	}
       my_error(check == -1, args[0]);
       my_error(check == -1, ": Command not found.\n");
-      free_wordtab(paths);
+      if (!isatty(0))
+	exit(check != -1 ? check : 1);
     }
   else
     exec(args, 0);

@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Tue Nov 29 16:01:44 2016 Raphaël Goulmot
-** Last update Sat Apr  1 05:29:56 2017 Raphaël Goulmot
+** Last update Mon Apr  3 11:30:28 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -49,7 +49,8 @@ int	main(int argc, char **argv, char **env)
 	  return (0);
 	}
       commands(cmd, env);
-      free(cmd);
+      if (cmd)
+	free(cmd);
       if (!isatty(0))
 	break;
     }
