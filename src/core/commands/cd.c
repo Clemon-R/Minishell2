@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:53:41 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:35:35 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:53:42 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -22,12 +22,6 @@ int	error_handling(char *str, int size, int state, char **args)
     my_putstr_err(": No such file or directory.\n");
   else if (size > 2)
     my_putstr_err("cd: Too many arguments.\n");
-  else if (str)
-    {
-      my_putstr("Directory: ");
-      my_putstr(str);
-      my_putchar('\n');
-    }
   return (!str || size > 2 ? 1 : 0);
 }
 
