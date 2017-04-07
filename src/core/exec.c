@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Wed Jan  4 09:08:05 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:15:46 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:20:55 2017 Raphaël Goulmot
 */
 
 #include "exec.h"
@@ -54,9 +54,8 @@ int    exec(char **vars, char type)
 	{
 	  if (!type)
 	    {
-	      my_putstr_err("bash: ");
 	      my_putstr_err(vars[0]);
-	      my_putstr_err(": No such file or directory\n");
+	      my_putstr_err(": Permission denied.\n");
 	    }
 	  exit(-1);
 	}
