@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Wed Jan  4 09:08:05 2017 Raphaël Goulmot
-** Last update Mon Apr  3 11:34:36 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:15:46 2017 Raphaël Goulmot
 */
 
 #include "exec.h"
@@ -32,8 +32,11 @@ int	child(int pid, char type)
   waitpid(pid, &status, 0);
   if (WIFEXITED(status))
     status = WEXITSTATUS(status);
-  if (status == 139 && !type)
-    my_putstr_err("Segmentation fault (core dumped)\n");
+  my_error(status == 136 && !type, "Floating exception (core dumped)\n");
+  my_error(status == 8 && !type, "Floating exception\n");
+  my_error(status == 139 && !type, "Segmentation fault (core dumped)\n");
+  my_error(status == 11 && !type, "Segmentation fault\n");
+  status = status == 8 ? 136 : status == 11 ? 139 : status;
   kill(pid, -1);
   return (status);
 }
