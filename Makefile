@@ -5,7 +5,7 @@
 ## Login   <raphael.goulmot@epitech.net>
 ##
 ## Started on  Tue Nov 29 15:57:16 2016 Raphaël Goulmot
-## Last update Sat Apr  1 04:54:33 2017 Raphaël Goulmot
+## Last update Fri Apr  7 14:59:16 2017 Raphaël Goulmot
 ##
 
 CC	=	gcc
@@ -21,6 +21,7 @@ SRC	=	src/utils/my_putstr_err.c	\
 		src/utils/my_string.c		\
 		src/utils/split.c		\
 		src/utils/line.c		\
+		src/core/multi_commands.c	\
 		src/core/commands.c		\
 		src/core/commands/exit.c	\
 		src/core/commands/env.c		\

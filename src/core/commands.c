@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Fri Jan 20 01:21:03 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:45:02 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:58:30 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -111,9 +111,6 @@ int	commands(char *arg, char **env)
   int	value;
 
   value = 0;
-  clean_space_tab(arg);
-  replace_tab_by_space(arg);
-  clean_double_space(arg);
   if (!*arg || !(args = split(arg, ' ')) || !*args)
     {
       my_putchar(!isatty(0) ? '\n' : '\0');
