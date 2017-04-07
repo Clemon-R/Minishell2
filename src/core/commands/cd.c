@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:53:41 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:53:42 2017 Raphaël Goulmot
+** Last update Fri Apr  7 18:02:49 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -16,16 +16,16 @@ int	error_handling(char *str, int size, int state, char **args)
 {
   if (!str && size == 1)
     my_putstr_err("cd: No home directory.\n");
-  else if (str && size == 2 && !my_strcmp(args[1], "-"))
+  else if (str && size == 2 && !my_strcmp(args[1], "-") && state == -1)
     my_putstr_err(args[1]);
   if (state == -1 || (!str && size == 2))
-    my_putstr_err(": No such file or directory.\n");
+    my_putstr_err(": No such directory.\n");
   else if (size > 2)
     my_putstr_err("cd: Too many arguments.\n");
-  return (!str || size > 2 ? 1 : 0);
+  return (!str || size > 2 || state == -1 ? 1 : 0);
 }
 
-int	my_cd(char **env, char **args)
+int	my_cd(char ***env, char **args)
 {
   int	size;
   char	*value;
@@ -36,9 +36,9 @@ int	my_cd(char **env, char **args)
   size = args ? my_strstrlen(args) : 1;
   state = 0;
   if (size == 1)
-    value = get_var(env, "HOME");
+    value = get_var(*env, "HOME");
   else if (size == 2 && my_strcmp(args[1], "-"))
-    value = get_var(env, "OLDPWD");
+    value = get_var(*env, "OLDPWD");
   else
     value = args[1];
   path = getcwd(buff, 4096);

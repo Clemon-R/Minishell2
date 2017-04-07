@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Tue Nov 29 16:01:44 2016 Raphaël Goulmot
-** Last update Fri Apr  7 14:59:04 2017 Raphaël Goulmot
+** Last update Fri Apr  7 17:58:30 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -44,18 +44,17 @@ int	main(int argc, char **argv, char **env)
     return (84);
   while (1)
     {
-      display_prompt();
+      if (isatty(0))
+	display_prompt();
       cmd = get_next_line(0);
       if (!cmd)
 	{
 	  my_putchar('\n');
 	  return (0);
 	}
-      value = multi_commands(cmd, env);
+      value = multi_commands(cmd, &env);
       if (cmd)
 	free(cmd);
-      if (!isatty(0))
-	break;
     }
   return (value);
 }

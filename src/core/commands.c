@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Fri Jan 20 01:21:03 2017 Raphaël Goulmot
-** Last update Fri Apr  7 15:23:48 2017 Raphaël Goulmot
+** Last update Fri Apr  7 17:59:01 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -32,9 +32,9 @@ t_functions	*get_all_functions()
   return (list);
 }
 
-int	(*get_function(char *str))(char **, char **)
+int	(*get_function(char *str))(char ***, char **)
 {
-  int	(*pts)(char **, char **);
+  int	(*pts)(char ***, char **);
   t_functions	*list;
   int	i;
   int	count;
@@ -75,7 +75,7 @@ char	*get_var(char **env, char *name)
     return (0);
 }
 
-int	launch_args(char *path, char **env, char **args)
+int	launch_args(char *path, char **args)
 {
   char	**paths;
   char	*name;
@@ -103,11 +103,11 @@ int	launch_args(char *path, char **env, char **args)
   return (check != -1 ? check : 1);
 }
 
-int	commands(char *arg, char **env)
+int	commands(char *arg, char ***env)
 {
   char	**args;
   char	*path;
-  int	(*function)(char **, char **);
+  int	(*function)(char ***, char **);
   int	value;
 
   value = 0;
@@ -117,7 +117,7 @@ int	commands(char *arg, char **env)
       my_putchar(!isatty(0) ? '\n' : '\0');
       return (0);
     }
-  my_error(!(path = get_var(env, "PATH")), "ERROR: Path not found !\n");
+  path = get_var(*env, "PATH");
   function = get_function(args[0]);
   if (function)
     if (!isatty(0))
@@ -125,7 +125,7 @@ int	commands(char *arg, char **env)
     else
       (*function)(env, args);
   else
-    value = (launch_args(path, env, args));
+    value = (launch_args(path, args));
   free_wordtab(args);
   return (value);
 }
