@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Fri Apr  7 14:55:41 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:58:19 2017 Raphaël Goulmot
+** Last update Fri Apr  7 15:21:48 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
