@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:51:24 2017 Raphaël Goulmot
-** Last update Mon Apr  3 13:48:51 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:40:41 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -41,7 +41,7 @@ int	my_setenv(char **env, char **args)
 	  free_wordtab(line);
 	}
       value = my_strcpy(args[1], "=");
-      (env ? *env++ = (size == 2 ? value : my_strcpy(value, args[2])) : 0);
+      (env ? *env++ = my_strcpy(value, size == 2 ? args[2] : "") : 0);
       free(value);
       (env ? *env = 0 : 0);
     }
