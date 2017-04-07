@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Fri Jan 20 01:21:03 2017 Raphaël Goulmot
-** Last update Mon Apr  3 13:50:12 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:45:02 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -75,7 +75,7 @@ char	*get_var(char **env, char *name)
     return (0);
 }
 
-void	launch_args(char *path, char **env, char **args)
+int	launch_args(char *path, char **env, char **args)
 {
   char	**paths;
   char	*name;
@@ -100,8 +100,7 @@ void	launch_args(char *path, char **env, char **args)
     }
   else
     check = exec(args, 0);
-  if (!isatty(0))
-    exit(check != -1 ? check : 1);
+  return (check != -1 ? check : 1);
 }
 
 int	commands(char *arg, char **env)
@@ -109,7 +108,9 @@ int	commands(char *arg, char **env)
   char	**args;
   char	*path;
   int	(*function)(char **, char **);
+  int	value;
 
+  value = 0;
   clean_space_tab(arg);
   replace_tab_by_space(arg);
   clean_double_space(arg);
@@ -122,11 +123,11 @@ int	commands(char *arg, char **env)
   function = get_function(args[0]);
   if (function)
     if (!isatty(0))
-      return ((*function)(env, args));
+      value = ((*function)(env, args));
     else
       (*function)(env, args);
   else
-    launch_args(path, env, args);
+    value = (launch_args(path, env, args));
   free_wordtab(args);
-  return (0);
+  return (value);
 }
