@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Wed Jan  4 09:08:05 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:34:46 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:46:04 2017 Raphaël Goulmot
 */
 
 #include "exec.h"
@@ -37,7 +37,6 @@ int	child(int pid, char type)
   my_error(status == 139 && !type, "Segmentation fault (core dumped)\n");
   my_error(status == 11 && !type, "Segmentation fault\n");
   status = status == 8 ? 136 : status == 11 ? 139 : status;
-  my_put_nbr(status);
   kill(pid, -1);
   return (status);
 }
