@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:53:41 2017 Raphaël Goulmot
-** Last update Mon Apr  3 14:24:42 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:35:35 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -28,7 +28,7 @@ int	error_handling(char *str, int size, int state, char **args)
       my_putstr(str);
       my_putchar('\n');
     }
-  return (!str || size > 2 ? 0 : 1);
+  return (!str || size > 2 ? 1 : 0);
 }
 
 int	my_cd(char **env, char **args)

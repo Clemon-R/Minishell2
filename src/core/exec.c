@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Wed Jan  4 09:08:05 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:20:55 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:34:46 2017 Raphaël Goulmot
 */
 
 #include "exec.h"
@@ -37,6 +37,7 @@ int	child(int pid, char type)
   my_error(status == 139 && !type, "Segmentation fault (core dumped)\n");
   my_error(status == 11 && !type, "Segmentation fault\n");
   status = status == 8 ? 136 : status == 11 ? 139 : status;
+  my_put_nbr(status);
   kill(pid, -1);
   return (status);
 }
@@ -55,7 +56,8 @@ int    exec(char **vars, char type)
 	  if (!type)
 	    {
 	      my_putstr_err(vars[0]);
-	      my_putstr_err(": Permission denied.\n");
+	      my_putstr_err(vars[0] && access(vars[0], X_OK) == -1 ?
+			    ": Permission denied.\n" : ": Not a directory.\n");
 	    }
 	  exit(-1);
 	}
