@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Fri Jan 20 01:21:03 2017 Raphaël Goulmot
-** Last update Mon Apr  3 13:32:20 2017 Raphaël Goulmot
+** Last update Mon Apr  3 13:50:12 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -82,7 +82,7 @@ void	launch_args(char *path, char **env, char **args)
   char	*tmp;
   char	check;
 
-  if (args && args[0][0] != '.' && !my_strstr(args[0], "/") && (check = -1)==-1)
+  if (args && args[0][0] != '.' && !my_strstr(args[0], "/") && (check= -1)==-1)
     {
       paths = path ? split(path, ':') : 0;
       while (check == -1 && paths && *paths && (tmp =my_strcpy(*paths++, "/")))

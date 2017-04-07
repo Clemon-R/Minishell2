@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Tue Nov 29 16:01:44 2016 Raphaël Goulmot
-** Last update Mon Apr  3 12:57:26 2017 Raphaël Goulmot
+** Last update Mon Apr  3 14:10:58 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -22,12 +22,13 @@ void	display_prompt()
 
    dir = split(getcwd(tmp, 4096), '/');
    size = my_strstrlen(dir);
-   if (size)
-     my_putstr(dir[size - 1]);
    if (size > 1)
+     my_putstr(dir[size - 2]);
+   if (size)
      {
-       my_putchar('/');
-       my_putstr(dir[size - 2]);
+       if (size > 1)
+	 my_putchar('/');
+       my_putstr(dir[size - 1]);
      }
    my_putchar('>');
    free_wordtab(dir);

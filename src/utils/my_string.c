@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Wed Mar  1 22:16:49 2017 Raphaël Goulmot
-** Last update Mon Apr  3 13:08:45 2017 Raphaël Goulmot
+** Last update Mon Apr  3 13:50:40 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -59,8 +59,8 @@ char    *my_strcpy(char *str1, char *str2)
   int   n;
 
   n = 0;
-  new = malloc(sizeof(char) * ((str1 ? my_strlen(str1) : 0) +
-			       (str2 ? my_strlen(str2) : 0) + 1));
+  new = malloc(sizeof(char) * ((str1 ? my_strlen(str1) : 0)
+			       + (str2 ? my_strlen(str2) : 0) + 1));
   while (str1 && *str1)
     new[n++] = *str1++;
   while (str2 && *str2)
