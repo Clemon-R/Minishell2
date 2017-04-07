@@ -5,11 +5,22 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:51:24 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:40:41 2017 Raphaël Goulmot
+** Last update Fri Apr  7 14:51:50 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
 #include <stdlib.h>
+
+char	my_is_alphanumeric(char *str)
+{
+  while (*str)
+    {
+      if (!(my_char_isalpha(*str) || my_char_isnumeric(*str) || *str == '_'))
+	return (0);
+      str++;
+    }
+  return (1);
+}
 
 int	my_env(char **env, char **useless)
 {
@@ -30,11 +41,10 @@ int	my_setenv(char **env, char **args)
   size = env ? my_strstrlen(args) : 0;
   if (size == 1)
     return (my_env(env, args));
-  else if (size >= 2 && size <= 3 && !(value = 0))
+  else if (size >= 2 && size <= 3 && my_is_alphanumeric(args[1]) && !(value=0))
     {
-      while (!value && env && *env)
+      while (!value && env && *env && (line = split(*env, '=')))
 	{
-	  line = split(*env, '=');
 	  if (line && my_strstrlen(line) && my_strcmp(line[0], args[1]))
 	    value = *env;
 	  env += !value ? 1 : 0;
@@ -46,7 +56,8 @@ int	my_setenv(char **env, char **args)
       (env ? *env = 0 : 0);
     }
   else
-    my_putstr_err("setenv: Too many arguments.\n");
+    my_putstr_err(size > 3 ? "setenv: Too many arguments.\n" :
+	     "setenv: Variable name must contain alphanumeric characters.\n");
   return (size > 3 ? 1 : 0);
 }
 
