@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Fri Jan 20 01:21:03 2017 Raphaël Goulmot
-** Last update Sun Apr  9 17:20:13 2017 Raphaël Goulmot
+** Last update Sun Apr  9 19:42:01 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -75,7 +75,7 @@ char	*get_var(char **env, char *name)
     return (0);
 }
 
-int	launch_args(char *path, char **args)
+int	launch_args(char *path, char **args, int *vars, char next)
 {
   char	**paths;
   char	*name;
@@ -91,7 +91,7 @@ int	launch_args(char *path, char **args)
 	  free(tmp);
 	  tmp = args[0];
 	  args[0] = name;
-	  check = exec(args, 1);
+	  check = exec(args, 1, vars, next);
 	  args[0] = tmp;
 	  free(name);
 	}
@@ -99,11 +99,11 @@ int	launch_args(char *path, char **args)
       my_error(check == -1, ": Command not found.\n");
     }
   else
-    check = exec(args, 0);
+    check = exec(args, 0, vars, next);
   return (check != -1 ? check : 1);
 }
 
-int	commands(char *arg, char ***env)
+int	commands(char *arg, char ***env, int *vars, char next)
 {
   char	**args;
   char	*path;
@@ -125,7 +125,7 @@ int	commands(char *arg, char ***env)
     else
       (*function)(env, args);
   else
-    value = (launch_args(path, args));
+    value = launch_args(path, args, vars, next);
   free_wordtab(args);
   return (value);
 }

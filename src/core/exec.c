@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Wed Jan  4 09:08:05 2017 Raphaël Goulmot
-** Last update Sun Apr  9 17:18:53 2017 Raphaël Goulmot
+** Last update Sun Apr  9 19:43:14 2017 Raphaël Goulmot
 */
 
 #include "exec.h"
@@ -25,10 +25,11 @@ int	is_regular_file(const char *path)
   return (S_ISREG(path_stat.st_mode));
 }
 
-int	child(int pid, char type)
+int	child(int pid, char type, int vars[])
 {
   int	status;
 
+  close(vars[1]);
   waitpid(pid, &status, 0);
   if (WIFEXITED(status))
     status = WEXITSTATUS(status);
@@ -41,12 +42,16 @@ int	child(int pid, char type)
   return (status);
 }
 
-int    exec(char **vars, char type)
+int    exec(char **vars, char type, int std[], char next)
 {
   int   childpid;
 
   if ((childpid = fork()) == 0)
     {
+      dup2(std[2], 0);
+      if (next)
+	dup2(std[1], 1);
+      close(std[0]);
       if (vars && vars[0] && is_regular_file(vars[0])
 	  && access(vars[0], X_OK) != -1)
 	execve(vars[0], vars, 0);
@@ -62,5 +67,5 @@ int    exec(char **vars, char type)
 	}
     }
   else
-    return (child(childpid, type));
+    return (child(childpid, type, std));
 }

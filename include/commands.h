@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Fri Jan 20 01:21:29 2017 Raphaël Goulmot
-** Last update Fri Apr  7 17:55:57 2017 Raphaël Goulmot
+** Last update Sun Apr  9 19:42:10 2017 Raphaël Goulmot
 */
 
 #ifndef COMMANDS_H_
@@ -21,8 +21,9 @@ t_functions	*get_all_functions();
 int	(*get_function(char *))(char ***, char **);
 int	count_args(char **);
 char	*get_var(char **, char *);
-int	commands(char *, char ***);
+int	commands(char *, char ***, int *, char);
 int	multi_commands(char *, char ***);
+int	pipe_commands(char *, char ***);
 int	my_exit(char ***, char **);
 int	my_env(char ***, char **);
 int	my_setenv(char ***, char **);
