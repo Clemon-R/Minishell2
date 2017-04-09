@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:51:24 2017 Raphaël Goulmot
-** Last update Fri Apr  7 18:16:42 2017 Raphaël Goulmot
+** Last update Sun Apr  9 17:11:51 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -99,18 +99,18 @@ int	my_unsetenv(char ***env, char **args)
     my_putstr_err("unsetenv: Too few arguments.\n");
   else
     {
-      while (args && *(++args) && !(find = 0))
+      while (args && *(++args) && !(find = 0) && (clone = *env))
 	{
-	  clone = *env;
-	  while (clone && *clone && ++clone && (line=split(*(clone - 1), '=')))
+	  while (clone && *clone && (line=split(*clone++, '=')))
 	    {
 	      if (line && my_strstrlen(line) && my_strcmp(line[0], *args))
 		find = 1;
-	      *(clone - 1 - find) = *(clone - 1);
+	      else
+		*(clone - 1 - find) = *(clone - 1);
 	      if (line)
 		free_wordtab(line);
 	    }
-	  *(clone - find - 1) = 0;
+	  *(clone - find) = 0;
 	}
     }
   return (size == 1 ? 1 : 0);

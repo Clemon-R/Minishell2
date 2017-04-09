@@ -5,7 +5,7 @@
 ## Login   <raphael.goulmot@epitech.net>
 ##
 ## Started on  Tue Nov 29 15:57:16 2016 Raphaël Goulmot
-## Last update Fri Apr  7 14:59:16 2017 Raphaël Goulmot
+## Last update Sun Apr  9 17:15:19 2017 Raphaël Goulmot
 ##
 
 CC	=	gcc
@@ -37,7 +37,7 @@ OBJ	=	$(SRC:.c=.o)
 
 TMP	=	$(OBJ:.h=.h~)
 
-CFLAGS	=	-W -Wextra -Werror -Iinclude -g
+CFLAGS	=	-W -Wextra -Werror -Iinclude
 
 NAME	=	mysh
 

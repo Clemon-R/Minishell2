@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 **
 ** Started on  Wed Jan  4 09:08:05 2017 Raphaël Goulmot
-** Last update Fri Apr  7 14:46:04 2017 Raphaël Goulmot
+** Last update Sun Apr  9 17:18:53 2017 Raphaël Goulmot
 */
 
 #include "exec.h"
@@ -55,8 +55,8 @@ int    exec(char **vars, char type)
 	  if (!type)
 	    {
 	      my_putstr_err(vars[0]);
-	      my_putstr_err(vars[0] && access(vars[0], X_OK) == -1 ?
-			    ": Permission denied.\n" : ": Not a directory.\n");
+	      my_putstr_err(is_regular_file(vars[0]) ? ": Permission denied.\n"
+		     : ": Exec format error. Binary file not executable.\n");
 	    }
 	  exit(-1);
 	}

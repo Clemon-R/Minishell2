@@ -5,7 +5,7 @@
 ** Login   <raphael.goulmot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 04:53:41 2017 Raphaël Goulmot
-** Last update Fri Apr  7 18:02:49 2017 Raphaël Goulmot
+** Last update Sun Apr  9 17:13:29 2017 Raphaël Goulmot
 */
 
 #include "utils.h"
@@ -19,7 +19,7 @@ int	error_handling(char *str, int size, int state, char **args)
   else if (str && size == 2 && !my_strcmp(args[1], "-") && state == -1)
     my_putstr_err(args[1]);
   if (state == -1 || (!str && size == 2))
-    my_putstr_err(": No such directory.\n");
+    my_putstr_err(": Not a directory.\n");
   else if (size > 2)
     my_putstr_err("cd: Too many arguments.\n");
   return (!str || size > 2 || state == -1 ? 1 : 0);
